@@ -16,18 +16,18 @@ Includes authentication, protected routes, session persistence, and CRUD operati
 
 🗂️ Project Structure
 
-/css/styles.css -> Styles adapted to the design guide
-/js/app.js -> Authentication logic, routes, CRUD
-/db.json -> Test data for json-server
-/index.html -> Initial view
-/login.html -> Login
-/register.html -> Registration
-/dashboard.html -> Main dashboard
-/not-found.html -> 
-/README.md -> This file
+- /css/styles.css -> Styles adapted to the design guide
+- /js/app.js -> Authentication logic, routes, CRUD
+- /db.json -> Test data for json-server
+- /index.html -> Initial view
+- /login.html -> Login
+- /register.html -> Registration
+- /dashboard.html -> Main dashboard
+- /not-found.html -> 
+- /README.md -> This file
 
 ## 🧪 Test users
-Administrator:
+** Administrator:
 
 Email: admin@admin.com
 
@@ -37,7 +37,13 @@ Role: Administrator
 
 Included in db.json by default.
 
-Visitor:
+**Visitor: 
+
+Email: visitor@ejemplo.com
+
+Password:1234
+
+Role: Visitor
 
 Must register from the registration view (register.html).
 
@@ -45,14 +51,15 @@ Must register from the registration view (register.html).
 
 1️⃣ Install Dependencies
 
-npm install
+    npm install
 
 2️⃣ Launch json-server
 
-npx json-server --watch db.json --port 3000
+    npx json-server --watch db.json --port 3000
 
 This will expose the mock API at:
-http://localhost:3000/
+
+    http://localhost:3000/
 
 3️⃣ Serve the SPA
 Open index.html directly or
