@@ -13,9 +13,9 @@ export function createFormComponent({onSubmit, mode = "read", user = null,} = {}
     <h3>${
       isEditMode
         ? mode === "create"
-          ? "Crear Usuario"
-          : "Editar Usuario"
-        : "Ver Usuarios"
+          ? "Create User"
+          : "Edit User"
+        : "View Users"
     }</h3>
     <form id="itemform">
         <input type="text" id="name" placeholder="Nombre" value="${ user?.name || "" }" ${isEditMode ? "" : "disabled"} required>
@@ -65,7 +65,7 @@ export function createFormComponent({onSubmit, mode = "read", user = null,} = {}
 
       if (!name || !email || !phone || !enrollNumber || !dateOfEvent || !role) {
         // Valida que los campos esten completos
-        message.textContent = "Todos los campos son obligatorios";
+        message.textContent = "All fields are required";
         return;
       };
       // Dependiendo si editinId es null o no agrega o actualiza un usuario
@@ -73,10 +73,10 @@ export function createFormComponent({onSubmit, mode = "read", user = null,} = {}
         const data = { name, email, phone, enrollNumber, dateOfEvent, role,};
         if (editinId) {
           await updateItem(editinId, data);
-          message.textContent = "Evento actualizado correctamente";
+          message.textContent = "Event updated successfully";
         } else {
           await createItem(data);
-          message.textContent = "Evento creado correctamente";
+          message.textContent = "Successfully created event";
         }
 
         // Resetea el formulario y el EditinId cada vez que se agrega o se crea un usuario
@@ -85,7 +85,7 @@ export function createFormComponent({onSubmit, mode = "read", user = null,} = {}
         if (onSubmit) onSubmit();
       } catch (error) {
         console.error(error);
-        message.textContent = error.message || "Error al guardar el usuario";
+        message.textContent = error.message || "Error saving user";
       }
     });
   }
@@ -103,13 +103,13 @@ export function createFormComponent({onSubmit, mode = "read", user = null,} = {}
         // Dependiendo del rol nos deja aditar o visualizar
         if (roleInput) roleInput.value = item.role;
         editinId = item.id;
-        message.textContent = isAdmin ? `Editando usuario ID: ${item.id}`: `Viendo usuario ID: ${item.id}`;
+        message.textContent = isAdmin ? `Editing user ID: ${item.id}`: `Viewing user ID: ${item.id}`;
       } else {
-        message.textContent = 'Usuario no encontrado'
+        message.textContent = 'User not found'
       }
     } catch (error) {
       console.error(error);
-      message.textContent = error.message || "Error al cargar los datos del usuario";
+      message.textContent = error.message || "Error loading user data";
     }
   }
 

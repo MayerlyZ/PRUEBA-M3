@@ -6,7 +6,7 @@ export async function login(email, password) {
     const users = await getUsers();
     const user = users.find((u) => u.email === email && u.password === password);
     if (!user) {
-        throw new Error('Credenciales incorrectas');
+        throw new Error('Incorrect credentials');
     }
     localStorage.setItem(
       'user',
@@ -19,7 +19,7 @@ export async function login(email, password) {
     );
     return true;
   } catch (error) {
-    throw new Error(error.message || "Error al iniciar sesión");
+    throw new Error(error.message || "Login error");
   }
 }
 
@@ -30,12 +30,12 @@ export async function register({name, email, password, phone, enrollNumber, date
         // Validamos que el correo no este registrado ya
         const existingUser = users.find((u) => u.email === email);
         if (existingUser) {
-            throw new Error('El correo electrónico ya está registrado');
+            throw new Error('The email is already registered');
         }
         const newUser = await createItem({name, email, password, phone, enrollNumber, dateOfEvent, role});
         return newUser;  
     } catch (error) {
-        throw new Error(error.message || 'Error al registrar el usuario');
+        throw new Error(error.message || 'Error registering user');
     }
 }
 

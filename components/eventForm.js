@@ -9,11 +9,11 @@ export function createEventFormComponent({ onSubmit, mode = 'read', event = null
   // Creacion del formulario 
   const container = document.createElement('div');
   container.innerHTML = `
-    <h3>${isEditMode ? (mode === 'create' ? 'Crear Evento' : 'Editar Evento') : 'Ver Evento'}</h3>
+    <h3>${isEditMode ? (mode === 'create' ? 'Create Event' : 'Edit Event') : 'View Event'}</h3>
     <form id="eventForm">
       <input type="text" id="title" placeholder="Título" value="${event.title || ''}" ${isEditMode ? '' : 'disabled'} required>
       <textarea id="description" placeholder="Descripción" ${isEditMode ? '' : 'disabled'} required>${event?.description || ''}</textarea>
-      <input type="date" id="startDate" placeholder="Fecha de inicio" value="${event?.startDate || ''}" ${isEditMode ? '' : 'disabled'} required>
+      <input type="date" id="startDate" placeholder="Fecha del evento" value="${event?.startDate || ''}" ${isEditMode ? '' : 'disabled'} required>
       <input type="text" id="capacity" placeholder="Capacity" value="${event?.capacity || ''}" ${isEditMode ? '' : 'disabled'} required>
       ${isEditMode ? '<button type="submit">Save</button>' : ''}
     </form>
@@ -41,7 +41,7 @@ export function createEventFormComponent({ onSubmit, mode = 'read', event = null
 
         // Valida que todos los campos esten llenos
       if (!title || !description || !startDate || !capacity) {
-        message.textContent = 'Todos los campos son obligatorios';
+        message.textContent = 'All fields are required';
         return;
       }
 
@@ -50,11 +50,11 @@ export function createEventFormComponent({ onSubmit, mode = 'read', event = null
         const data = { title, description, startDate, capacity };
         if (editinId) {
           await updateEvent(editinId, data);
-          message.textContent = 'Evento actualizado correctamente';
+          message.textContent = 'Event updated successfully';
         // Si pasa null agrega el evento
         } else {
           await createEvent(data);
-          message.textContent = 'Evento creado correctamente';
+          message.textContent = 'Successfully created event';
         }
     
         // Reseteo de valores y de form
@@ -63,7 +63,7 @@ export function createEventFormComponent({ onSubmit, mode = 'read', event = null
         if (onSubmit) onSubmit();
       } catch (error) {
         console.error(error);
-        message.textContent = error.message || 'Error al guardar el evento';
+        message.textContent = error.message || 'Error saving event';
       }
     });
   }
@@ -78,13 +78,13 @@ export function createEventFormComponent({ onSubmit, mode = 'read', event = null
         startDateInput.value = item.startDate;
         capacityInput.value = item.capacity;
         editinId = item.id;
-        message.textContent = isAdmin ? `<h2> EDITANDO</h2>Editando evento ID: ${item.id}` : `Viendo evento ID: ${item.id}`;
+        message.textContent = isAdmin ? `Editing event ID: ${item.id}` : `Viewing event ID: ${item.id}`;
       } else {
-        message.textContent = 'evento no encontrado';
+        message.textContent = 'Event not found';
       }
     } catch (error) {
       console.error(error);
-      message.textContent = error.message || 'Error al cargar los datos del evento';
+      message.textContent = error.message || 'Error loading event data';
     }
   }
 

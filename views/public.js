@@ -9,7 +9,7 @@ export function publicView() {
   const container = document.createElement('div');
   container.innerHTML = `
     <header>
-      ${user ? `<div>Bienvenido, ${user.name}</div>` :
+      ${user ? `<div>Welcome, ${user.name}</div>` :
       `<div><a href="#/login">LogIN</a> | <a href="#/register">Register</a></div>`}
     </header>
     <nav class="sidebar">

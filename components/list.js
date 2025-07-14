@@ -3,7 +3,7 @@ import { getEvent, deleteItem } from "../js/api.js"; // Importamos funciones
 export function createListComponent(onEdit){
     // crea una lista de los elementos de la bd
     const container = document.createElement('div');
-    container.innerHTML = '<h2>Listado de Usuarios</h2>';
+    container.innerHTML = '<h2>User List</h2>';
     const listEL = document.createElement('ul');
     container.appendChild(listEL);
 
@@ -13,7 +13,7 @@ export function createListComponent(onEdit){
             listEL.innerHTML = '';
 
             if(items.length == 0){
-                listEL.innerHTML = '<li>No hay registros</li>';
+                listEL.innerHTML = '<li>There are no records</li>';
                 return;
             }
 
@@ -44,18 +44,18 @@ export function createListComponent(onEdit){
             listEL.querySelectorAll('button[data-delete]').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const id = parseInt(btn.dataset.delete);
-                    if(confirm('¿Esta seguro de eliminar el usuario?')){
+                    if(confirm('Are you sure you want to delete the user??')){
                         try{
                             await deleteItem(id);
                             loadItems();
                         } catch (err) {
-                            alert(`Alerta al eliminar item`);
+                            alert(`Alert when deleting item`);
                         }
                     }
                 });
             });
         } catch (err) {
-            listEL.innerHTML = '<li>Error al cargar los datos</li>';
+            listEL.innerHTML = '<li>Error loading data</li>';
             console.error(err);
         }
     }

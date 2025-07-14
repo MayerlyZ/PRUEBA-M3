@@ -18,19 +18,19 @@ export function adminView() {
     <nav class="sidebar">
       <ul>
         <li><a href="#/dashboard">Dashboard</a></li>
-        <li><a href="#/admin/users">Gestionar Usuarios</a></li>
-        <li><a href="#/admin/courses">Gestionar Eventos</a></li>
+        <li><a href="#/admin/users">Manage Users</a></li>
+        <li><a href="#/admin/courses">Manage Events</a></li>
       </ul>
     </nav>
     <main class="admin-main">
       <div class="admin-content">
-        <h2>${isUsersView ? 'Gestionar Usuarios' : isEventView ? 'Gestionar Eventos' : 'Panel de Administrador'}</h2>
+        <h2>${isUsersView ? 'Manage Users' : isEventView ? 'Manage Events' : 'Administrator Panel'}</h2>
         ${isUsersView ? `
           <section class="form-section">
             <div id="user-form" class="form-container"></div>
           </section>
           <section class="table-section">
-            <h3>Lista de Usuarios</h3>
+            <h3>User List</h3>
             <div class="table-wrapper">
               <table>
                 <thead>
@@ -42,11 +42,11 @@ export function adminView() {
           </section>
         ` : isEventView ? `
           <section class="form-section">
-            <h3>Crear Evento</h3>
+            <h3>Create Event</h3>
             <div id="event-form" class="form-container"></div>
           </section>
           <section class="table-section">
-            <h3>Lista de Eventos</h3>
+            <h3>Event List</h3>
             <div class="table-wrapper">
               <table>
                 <thead>
@@ -56,7 +56,7 @@ export function adminView() {
               </table>
             </div>
           </section>
-        ` : '<p>Seleccione una opción del menú</p>'}
+        ` : '<p>Select an option from the menu</p>'}
       </div>
     </main>
   `;
@@ -82,8 +82,8 @@ export function adminView() {
           <td>${user.email}</td>
           <td>${user.role}</td>
           <td>
-            <button class="edit-user" data-id="${user.id}">Editar</button>
-            <button class="delete-user" data-id="${user.id}">Eliminar</button>
+            <button class="edit-user" data-id="${user.id}">Edit</button>
+            <button class="delete-user" data-id="${user.id}">Delete</button>
           </td>
         `;
         usersTable.appendChild(tr);
@@ -130,8 +130,8 @@ export function adminView() {
           <td>${event.startDate}</td>
           <td>${event.duration}</td>
           <td>
-            <button class="edit-event" data-id="${event.id}">Editar</button>
-            <button class="delete-event" data-id="${event.id}">Eliminar</button>
+            <button class="edit-event" data-id="${event.id}">Edit</button>
+            <button class="delete-event" data-id="${event.id}">Delete</button>
           </td>
         `;
         coursesTable.appendChild(tr);

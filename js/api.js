@@ -6,14 +6,14 @@ const API_URL = 'http://localhost:3000';
 // Funcion para obtener todos los datos de la API
 export async function getUsers(){
     const res = await fetch(`${API_URL}/users`);
-    if(!res.ok) throw new Error('Error al obtener los usuarios');
+    if(!res.ok) throw new Error('Error getting users');
     return await res.json();
 };
 
 // Funcion para obtener un dato por id
 export async function getElementById(id) {
     const res = await fetch(`${API_URL}/users/${id}`);
-    if(!res.ok) throw new Error('Usuario no encontrado');
+    if(!res.ok) throw new Error('User not found');
     return await res.json();
 }
 
@@ -21,14 +21,14 @@ export async function getElementById(id) {
 export async function createItem(data) {
     const user = getCurrentUser();
     if(!user || user.role !== 'admin') {
-        throw new Error('Solo admins pueden crear usuarios');
+        throw new Error('Only admins can create users');
     }
     const res = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify(data),
     });
-    if(!res.ok) throw new Error('Error al crear usuario');
+    if(!res.ok) throw new Error('Error creating user');
     return await res.json();
 }
 
@@ -36,14 +36,14 @@ export async function createItem(data) {
 export async function updateItem(id, data) {
     const user = getCurrentUser();
     if(!user || user.role !== 'admin') {
-        throw new Error('Solo admins pueden actualizar usuarios');
+        throw new Error('Only admins can update users');
     }
     const res = await fetch(`${API_URL}/users/${id}`, {
         method: 'PUT',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify(data)
     });
-    if(!res.ok) throw new Error('Error al actualizar usuario');
+    if(!res.ok) throw new Error('Error updating user');
     return await res.json();
 }
 
@@ -51,12 +51,12 @@ export async function updateItem(id, data) {
 export async function deleteItem(id) {
     const user = getCurrentUser();
     if(!user || user.role !== 'admin') {
-        throw new Error('Solo admins pueden eliminar usuarios');
+        throw new Error('Only admins can delete users');
     }
     const res = await fetch(`${API_URL}/users/${id}`, {
         method: 'Delete',
     });
-    if(!res.ok) throw new Error('Error al eliminar usuario');
+    if(!res.ok) throw new Error('Error deleting user');
     return await res.json();
 }
 
@@ -65,14 +65,14 @@ export async function deleteItem(id) {
 // Funcion para obtener los eventos
 export async function getEvent(){
     const res = await fetch(`${API_URL}/events`);
-    if(!res.ok) throw new Error('Evento no encontrado');
+    if(!res.ok) throw new Error('Event not found');
     return await res.json();
 };
 
 // Funcion para obtener un evento por id
 export async function getEventById(id) {
     const res = await fetch(`${API_URL}/events/${id}`);
-    if(!res.ok) throw new Error('Evento no encontrado');
+    if(!res.ok) throw new Error('Event not found');
     return await res.json();
 }
 
@@ -80,7 +80,7 @@ export async function getEventById(id) {
 export async function createEvent(data) {
     const user = getCurrentUser();
     if(!user || user.role !== 'admin') {
-        throw new Error('Solo admins pueden crear eventos');
+        throw new Error('Only admins can create events');
     }
     const res = await fetch(`${API_URL}/events`, {
         method: 'POST',
@@ -95,14 +95,14 @@ export async function createEvent(data) {
 export async function updateEvent(id, data) {
     const user = getCurrentUser();
     if(!user || user.role !== 'admin') {
-        throw new Error('Solo admins pueden actualizar los eventos');
+        throw new Error('Only admins can update events');
     }
     const res = await fetch(`${API_URL}/events/${id}`, {
         method: 'PUT',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify(data)
     });
-    if(!res.ok) throw new Error('Error al actualizar los eventos');
+    if(!res.ok) throw new Error('Error updating events');
     return await res.json();
 }
 
@@ -110,12 +110,12 @@ export async function updateEvent(id, data) {
 export async function deleteEvent(id) {
     const user = getCurrentUser();
     if(!user || user.role !== 'admin') {
-        throw new Error('Solo admins pueden eliminar los eventos');
+        throw new Error('Only admins can delete events');
     }
     const res = await fetch(`${API_URL}/events/${id}`, {
         method: 'Delete',
     });
-    if(!res.ok) throw new Error('Error al eliminar el evento');
+    if(!res.ok) throw new Error('Error deleting event');
     return await res.json();
 }
 
@@ -124,19 +124,19 @@ export async function deleteEvent(id) {
 export async function enrollInEvent(userId, eventId) {
     const user = getCurrentUser();
     if(!user || user.role == 'userId') {
-        throw new Error('Solo puedes reservar con tu cuenta');
+        throw new Error('You can only book with your account');
     }
     const res = await fetch(`${API_URL}/enrollments`, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify({ userId: parseInt(userId), eventId: parseInt(eventId) }),
     });
-    if(!res.ok) throw new Error('Error al reservar el evento');
+    if(!res.ok) throw new Error('Error booking the event');
     return await res.json();
 }
 
 export async function getEnrollmentsByUser(userId) {
     const res = await fetch(`${API_URL}/enrollments?userId=${userId}`);
-    if(!res.ok) throw new Error('Error al obtener los eventos reservados');
+    if(!res.ok) throw new Error('Error getting reserved events');
     return await res.json();
 }
