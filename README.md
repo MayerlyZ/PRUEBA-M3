@@ -61,7 +61,11 @@ This will expose the mock API at:
 
     http://localhost:3000/
 
-3️⃣ Serve the SPA
+3️⃣ And other terminal
+        
+        npm run dev 
+
+ Serve the SPA
 Open index.html directly or
 
 🌐 Main Routes
